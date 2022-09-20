@@ -119,7 +119,7 @@ services:
         volumes:
             - ./catalog:/etc/trino/catalog
         ports:
-            - 8090:8080
+            - 8097:8080
         networks:
             - hadoop
         
