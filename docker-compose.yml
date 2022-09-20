@@ -113,16 +113,18 @@ services:
         networks:
             - hadoop
     
-    presto-coordinator:
-        image: shawnzhu/prestodb:0.181
-        container_name: presto-coordinator
+    trino:
+        image: trinodb/trino
+        container_name: trino
+        volumes:
+            - ./catalog:/etc/trino/catalog
         ports:
             - 8090:8080
         networks:
             - hadoop
         
     spark-master:
-        image: bde2020/spark-master:3.1.1-hadoop3.2
+        image: bde2020/spark-master:3.2.1-hadoop3.2
         container_name: spark-master
         depends_on:
             - namenode
@@ -140,7 +142,7 @@ services:
             - hadoop
 
     spark-worker:
-        image: bde2020/spark-worker:3.1.1-hadoop3.2
+        image: bde2020/spark-worker:3.2.1-hadoop3.2
         container_name: spark-worker
         depends_on:
             - spark-master
