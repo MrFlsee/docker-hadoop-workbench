@@ -117,9 +117,32 @@ services:
         image: trinodb/trino
         container_name: trino
         volumes:
-            - ./catalog:/etc/trino/catalog
+            - ./trino/catalog:/etc/trino/catalog
+            - ./trino/coordinator/config.properties:/etc/trino/config.properties
         ports:
             - 8097:8080
+        networks:
+            - hadoop
+
+    trino-worker0:
+        image: trinodb/trino
+        container_name: trino-worker0
+        volumes:
+            - ./trino/catalog:/etc/trino/catalog
+            - ./trino/coordinator/config.properties:/etc/trino/config.properties
+        ports:
+            - 8098:8080
+        networks:
+            - hadoop
+
+    trino-worker1:
+        image: trinodb/trino
+        container_name: trino-worker1
+        volumes:
+            - ./trino/catalog:/etc/trino/catalog
+            - ./trino/coordinator/config.properties:/etc/trino/config.properties
+        ports:
+            - 8096:8080
         networks:
             - hadoop
         
